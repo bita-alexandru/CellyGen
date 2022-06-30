@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Golly Help: Configuring the G.A.</title>
+		<link rel="icon" type="image/x-icon" href="icon.ico">
+	</head>
+	
+	<body bgcolor="#e0ffff">
+		<center><h1>Configuring the G.A.</h1></center>
+			
+			<p>The Genetic Algorithm can be configured by tweaking the following values:</p>
+			<ul>
+				<li><b>Population Size</b></li>
+				The number of chromosomes that will make up the algorithm. The more, the better but at the cost of time performance.
+				<li><b>Mutation Probability</b></li>
+				The probability that a chromosome's gene will be modified. Usually set on a very small value.
+				<li><b>Crossover Probability</b></li>
+				The probability that a couple of chromosomes will produce offsprings (new chromosomes with combined information from both parents).
+			</ul>
+			<ul>
+				<li><b>Generation Fitness Multiplier</b></li>
+				The multiplier to the generation count reached by a chromosome. A high value means that the algorithm prioritizes finding an initial configuration that leads to a high number of generations.
+				<li><b>Population Fitness Multiplier</b></li>
+				The multiplier to the average population count reached by a chromosome. A high value means that the algorithm prioritizes finding an initial configuration that leads to a high average population.
+				<li><b>Initial Size Fitness Multiplier</b></li>
+				The multiplier to the initial population size of a chromosome. A high value means that the algorithm prioritizes finding an initial configuration that minimizes the use of starting cells.
+			</ul>
+			<ul>
+				<li><b>Population Target</b></li>
+				The population size that a chromosome is supposed to stop running the algorithm once it reaches this value.
+				<li><b>Generation Target</b></li>
+				The generation count that a chromosome is supposed to stop running the algorithm once it reaches this value.
+				<li><b>Epochs Target</b></li>
+				The epoch count that the algorithm is supposed to stop running once it reaches this value.
+			</ul>
+			<ul>
+				<li><b>Selection Method</b></li>
+				The method of selecting the chromosomes for crossover, as in forming couples of parents and creating new chromosomes.<br/>
+				There are 6 selection methods to choose from:
+				<ol>
+					<li><b>Roulette Wheel Selection</b></li>
+					A stochastic selection method, where the selection probability of a chromosome is proportional to its fitness.
+					<li><b>Rank Selection</b></li>
+					Ranks each chromosome by their fitness and makes the selection based on that rank, and not on their fitness.
+					<li><b>Steady State Selection</b></li>
+					This selection method is based on the concept "survival of the fittest". As opposed to replacing an entire population with the resulted offsprings, it only replaces the bottom 10% chromosomes.
+					<li><b>Tournament Selection</b>, (using 2-way tournaments)</li>
+					Groups of 2 randomly chosen chromosomes are made and the most fit chromosomes are more likely to get selected for crossover (75% chance), although selecting the worse is also possible (25% chance).
+					<li><b>Elitism Selection</b>, (using 2 elites)</li>
+					At the end of a generation, the 2 most fit chromosomes are being kept and will not suffer any changes from mutations or crossovers.
+					<li><b>Random Selection</b></li>
+					Randomly selects chromosomes for the next generation.
+				</ol>
+			</ul>
+			
+			The <b>fitness function</b> is represented by:<br/>
+			<code>f(nOfGenerations, avgPopulation, initialSize) = 1 + (GFM*nOfGenerations + PFM*avgPopulation) * (1 - ISFM*initialSize/N)</code>,<br/>
+			where <code>GFM</code> means <code>Generation Fitness Multiplier</code>, <code>PFM</code> means <code>Population Fitness Multiplier</code>, <code>ISFM</code> means <code>Initial Size Fitness Multiplier</code> and <code>N</code> means the total number of cells in the grid
+	</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Golly Help: Defining Rules</title>
+		<link rel="icon" type="image/x-icon" href="icon.ico">
+	</head>
+	
+	<body bgcolor="#e0ffff">
+		<center><h1>Defining Rules</h1></center>
+
+		<p>Defining a rule takes one of the following syntax forms:</p>
+		<ol>
+			<li>
+				<b>A / B;</b><br/>
+				This means cells of state A will change into state B on the next generation.
+			</li>
+			<li>
+				<b>A / B : &lt;CONDITION&gt;;</b><br/>
+				This means cells of state A will change into state B only if the condition is being fulfilled.
+			</li>
+			<li>
+				<b>A / B : &lt;CONDITION_1&gt; &lt;chain_operator&gt; &lt;CONDITION_2&gt;;</b><br/>
+				When <code>&lt;chain_operator&gt;</code> is <code>or</code>, this means cells of state <code>A</code> will change into state <code>B</code> only if either condition is being fulfilled.<br/>
+				When <code>&lt;chain_operator&gt;</code> is <code>and</code>, this means cells of state <code>A</code> will change into state <code>B</code> only if both conditions are being fulfilled.<br/>
+				<sup>*</sup>Multiple conditions can be chained in this manner (with <code>and</code> having a stronger precedence than <code>or</code>).
+			</li>
+		</ol>
+		
+		<p>A <code>&lt;CONDITION&gt;</code> is a rule or a set of rules chained in the same way as previously presented and follows the syntax:</p>
+		<ul>
+			<li>
+				<b>(@&lt;neighbourhood&gt; = &lt;sign&gt;&lt;number_of_cells&gt;#&lt;state_of_cell&gt;)</b><br/>
+				When <code>&lt;sign&gt;</code> is not present, this means that the <code>&lt;neighbourhood&gt;</code> of the current cell that is being evaluated needs to have exactly <code>&lt;number_of_cells&gt;</code> cells of type <code>&lt;state_of_cell&gt;</code>.<br/>
+				When <code>&lt;sign&gt;</code> is <code>+</code>, this means that the <code>&lt;neighbourhood&gt;</code> of the current cell that is being evaluated needs to have more than <code>&lt;number_of_cells&gt;</code> cells of type <code>&lt;state_of_cell&gt;</code>.<br/>
+				When <code>&lt;sign&gt;</code> is <code>-</code>, this means that the <code>&lt;neighbourhood&gt;</code> of the current cell that is being evaluated needs to have less than <code>&lt;number_of_cells&gt;</code> cells of type <code>&lt;state_of_cell&gt;</code>.<br/>
+				<sup>*</sup>This type of sub-conditions can also be chained:<br/>
+				<code>(@&lt;neighbourhood&gt; = &lt;sign_1&gt;&lt;number_of_cells_1&gt;#&lt;state_of_cell_1&gt; &lt;chain_operator_1&gt; ... &lt;chain_operator_n&gt; &lt;sign_n&gt;&lt;number_of_cells_n&gt;#&lt;state_of_cell_n&gt; &lt;chain_operator_n&gt;)</code>
+			</li>
+		</ul>
+		
+		<p>A <code>&lt;neighbourhood&gt;</code> can be either a single neighbour, a set of neighbours or the <code>ALL</code> keyword.<br/>
+		The neighbours are expressed as <code>N, NE, E, SE, S, SW, W, NW</code> (denoting the cardinal directions) or <code>C</code> (denoting the center - the cell itself).<br/>
+		When <code>&lt;neighbourhood&gt;</code> is a single neighbour, the syntax is: <b>&lt;neighbour&gt;</b><br/>
+		When <code>&lt;neighbourhood&gt;</code> is a set of neighbours, the syntax is: <b>[&lt;neighbour_1&gt;, ..., &lt;neighbour_n&gt;]</b><br/>
+		When <code>&lt;neighbourhood&gt;</code> is <code>ALL</code>, this refers to the whole neighbourhood setup (as defined in the <a href="neighbours-panel.html">Neighbours Panel</a>)
+		</p>
+		
+		<p><b>Examples:</b><br/>
+		<code>A / B : (@ALL = 2#FREE);</code><br/>
+		This means that cells of state <code>A</code> will change into state <code>B</code> if their neighbourhood has exactly 2 cells of state <code>FREE</code>.</br>
+		<code>X / Y : (@ALL = +2#FREE & -3#Y) || (@[N,E,S,W] = 1#X) &amp; (@NW = 1#FREE);</code><br/>
+		This means that cells of state <code>X</code> will change into state Y if either: their neighbourhood has more than 2 cells of state FREE and less cells of type <code>Y</code> OR the neighbourhood formed by <code>N,E,S,W</code> have exactly 1 cell of state <code>X</code> and at <code>NW</code> there's one cell of state <code>FREE</code>.
+		</p>
+		
+		<p>The order of the rules will influence the Cellular Automaton.</p>
+		<p>Use <b>!</b> to mark a comment so that everything that follows after gets ignored.</p>
+	</body>
+</html>

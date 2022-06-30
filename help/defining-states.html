@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Golly Help: Defining States</title>
+		<link rel="icon" type="image/x-icon" href="icon.ico">
+	</head>
+	
+	<body bgcolor="#e0ffff">
+		<center><h1>Defining States</h1></center>
+
+		<p>Defining a state takes the following syntax form:</p>
+		<ul>
+			<li>
+				<b>&lt;name_of_the_state&gt;;</b><br/>
+				<b>Examples</b>:
+				<code>
+				<ul>
+					<li>STATE_A;</li>
+					<li>STATE_A; STATE B;</li>
+					<li>STATE_A;<br/>STATE B; STATE C;</li>
+				</ul>
+				</code>
+			</li>
+		</ul>
+
+	<p>You can define up to 255 states in this fashion as long as all of your states follow these rules:</p>
+	<ul>
+		<li>the name is no longer than 64 characters</li>
+		<li>the name includes only characters of the English alphabet or underscores "_"</li>
+		<li>there are no duplicate states</li>
+	</ul>
+	
+	<p>The state <code>FREE</code> is already defined by default and each white cell on the grid is, by design, of this state.</p>
+	<p>Use <b>!</b> to mark a comment so that everything that follows after gets ignored.<br/>
+	<i>Example:</i><br/>
+	<code>
+		!this is a comment<br/>
+		STATE_A; !this is another comment
+	</code>
+	</p>
+	</body>
+</html>

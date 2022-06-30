@@ -1,0 +1,17 @@
+[STATES]
+ON;
+DYING;
+
+[RULES]
+FREE / ON : (@ALL = 2#ON);
+ON / DYING;
+DYING / FREE;
+
+[NEIGHBORS]
+NW S W SW SE E NE N 
+[SIZE]
+100 100
+[CELLS]
+0 0 ON;
+0 1 ON;
+
